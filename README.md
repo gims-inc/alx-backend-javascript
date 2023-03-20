@@ -1,4 +1,4 @@
 # Backend-Js
 --------------
 
-  ![Back vs Front](https://imgur.com/HxDlsPh)
+  ![Back vs Front](https://i.imgur.com/HxDlsPh.jpeg)
