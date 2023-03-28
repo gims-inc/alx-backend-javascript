@@ -1,6 +1,6 @@
 # data_manipulation
 
-##  NDN Resources
+##  MDN Resources
 
  [Array](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array)
 
