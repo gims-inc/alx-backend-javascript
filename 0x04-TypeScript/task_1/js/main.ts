@@ -46,6 +46,6 @@ export interface Teacher {
     }
   }
   
-  export function createStudent(ctor: IStudentClassConstructor, firstName: string, lastName: string): IStudentClass {
-    return new ctor(firstName, lastName);
+  export function createStudent(conStructor: IStudentClassConstructor, firstName: string, lastName: string): IStudentClass {
+    return new conStructor(firstName, lastName);
   }
