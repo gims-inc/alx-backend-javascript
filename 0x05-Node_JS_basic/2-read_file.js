@@ -2,7 +2,6 @@ const fs = require('fs');
 
 function countStudents(path) {
   try {
-  
     const data = fs.readFileSync(path, 'utf8');
 
     const rows = data.trim().split('\n');
@@ -28,7 +27,7 @@ function countStudents(path) {
 
         totalStudents += 1;
 
-        if (studentsByField.hasOwnProperty(field)) {
+        if (Object.hasOwnProperty.call(studentsByField, field)) {
           studentsByField[field] += 1;
         } else {
           studentsByField[field] = 1;
@@ -39,7 +38,7 @@ function countStudents(path) {
     console.log(`Number of students: ${totalStudents}`);
 
     for (const field in studentsByField) {
-      if (studentsByField.hasOwnProperty(field)) {
+      if (Object.hasOwnProperty.call(studentsByField, field)) {
         const count = studentsByField[field];
         const list = students
           .filter((student) => student.field === field)
