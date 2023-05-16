@@ -1,16 +1,10 @@
 const fs = require('fs');
 
-function readFileAsync(path, options) {
-  return new Promise((resolve, reject) => {
-    fs.readFile(path, options, (error, data) => {
-      if (error) {
-        reject(error);
-      } else {
-        resolve(data);
-      }
-    });
-  });
-}
+// using promisify
+
+const { promisify } = require('util');
+
+const readFileAsync = promisify(fs.readFile);
 
 async function countStudents(path) {
   try {
@@ -31,16 +25,16 @@ async function countStudents(path) {
     });
 
     let totalStudents = 0;
-    const studentsByField = {};
+    let studentsByField = {};
 
     students.forEach((student) => {
       if (Object.keys(student).length > 0) {
-        const { field } = student;
+        const field = student['field'];
 
-        totalStudents += 1;
+        totalStudents++;
 
-        if (Object.hasOwnProperty.call(studentsByField, field)) {
-          studentsByField[field] += 1;
+        if (studentsByField.hasOwnProperty(field)) {
+          studentsByField[field]++;
         } else {
           studentsByField[field] = 1;
         }
@@ -50,11 +44,11 @@ async function countStudents(path) {
     console.log(`Number of students: ${totalStudents}`);
 
     for (const field in studentsByField) {
-      if (Object.hasOwnProperty.call(studentsByField, field)) {
+      if (studentsByField.hasOwnProperty(field)) {
         const count = studentsByField[field];
         const list = students
-          .filter((student) => student.field === field)
-          .map((student) => student.firstname);
+          .filter((student) => student['field'] === field)
+          .map((student) => student['firstname']);
 
         console.log(`Number of students in ${field}: ${count}. List: ${list.join(', ')}`);
       }
