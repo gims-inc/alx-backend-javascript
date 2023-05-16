@@ -2,7 +2,7 @@ const fs = require('fs');
 
 function countStudents(path) {
   try {
-    // Read the CSV file synchronously
+  
     const data = fs.readFileSync(path, 'utf8');
 
     const rows = data.trim().split('\n');
@@ -18,21 +18,18 @@ function countStudents(path) {
 
       return student;
     });
-    //console.log([...students])
 
     let totalStudents = 0;
-    let studentsByField = {};
+    const studentsByField = {};
 
     students.forEach((student) => {
       if (Object.keys(student).length > 0) {
-        const field = student['field'];
+        const { field } = student;
 
-        // Count the total number of students
-        totalStudents++;
+        totalStudents += 1;
 
-        // Count the number of students in each field
         if (studentsByField.hasOwnProperty(field)) {
-          studentsByField[field]++;
+          studentsByField[field] += 1;
         } else {
           studentsByField[field] = 1;
         }
@@ -41,13 +38,12 @@ function countStudents(path) {
 
     console.log(`Number of students: ${totalStudents}`);
 
-    // Log the number of students in each field
     for (const field in studentsByField) {
       if (studentsByField.hasOwnProperty(field)) {
         const count = studentsByField[field];
         const list = students
-          .filter((student) => student['field'] === field)
-          .map((student) => student['firstname']);
+          .filter((student) => student.field === field)
+          .map((student) => student.firstname);
 
         console.log(`Number of students in ${field}: ${count}. List: ${list.join(', ')}`);
       }
