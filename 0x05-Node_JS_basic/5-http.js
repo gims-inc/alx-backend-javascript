@@ -70,19 +70,17 @@ async function countStudents(path) {
 
     return all;
   } catch (error) {
-    throw new Error('Cannot load the database');
+    return new Error('Cannot load the database');
   }
 }
 
 const app = http.createServer((request, response) => {
-  const { method, url } = request;
-
-  if (method === 'GET' && url === '/') {
+  if (request.url === '/') {
     response.statusCode = 200;
     response.setHeader('Content-Type', 'text/plain');
     response.write('Hello Holberton School!');
     response.end();
-  } else if (method === 'GET' && url === '/students') {
+  } else if (request.url === '/students') {
     response.statusCode = 200;
     response.write('This is the list of our students\n');
     countStudents(DB_FILE)
@@ -92,14 +90,8 @@ const app = http.createServer((request, response) => {
         response.end();
       })
       .catch((error) => {
-        response.statusCode = 500;
         response.end(error.message);
       });
-  } else {
-    response.statusCode = 404;
-    response.setHeader('Content-Type', 'text/plain');
-    response.write('Not found');
-    response.end();
   }
 });
 
