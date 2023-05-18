@@ -1,6 +1,3 @@
-/* eslint-disable jest/valid-expect */
-/* eslint-disable no-unused-expressions */
-/* eslint-disable jest/prefer-expect-assertions */
 const sinon = require('sinon');
 const { expect } = require('chai');
 const Utils = require('./utils');
