@@ -14,7 +14,9 @@ describe('sendPaymentRequestToApi', () => {
 
     sendPaymentRequestToApi(100, 20);
 
-    // expect(consolespy.calledWith('The total is: 120')).to.be.true;
+    // console.log(consolespy.args); // Check the arguments passed to console.log
+
+    expect(consolespy.calledWith('The total is: 120}')).to.be.true;
     expect(fxnspy.calledWith('SUM', 100, 20)).to.be.true;
     expect(fxnspy.callCount).to.be.equal(1);
 
